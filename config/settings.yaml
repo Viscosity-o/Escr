@@ -1,0 +1,27 @@
+# settings.yaml
+# General application settings for the Global Intelligence Layer.
+# Sensitive values (API keys, secrets) must NOT be placed here.
+# Use environment variables (.env) for secrets.
+
+app:
+  name: global-intelligence-layer
+  version: "0.1.0"
+  environment: development  # Override via APP_ENV env var
+
+logging:
+  level: INFO  # Override via LOG_LEVEL env var
+  format: structured  # structured | plain
+
+collection:
+  # Default poll interval in seconds (can be overridden per source in sources.yaml)
+  default_poll_interval_seconds: 300
+  # Default HTTP timeout in seconds
+  default_timeout_seconds: 30
+  # Default max retry attempts on transient failures
+  default_max_retries: 3
+  # Delay between retries in seconds
+  retry_backoff_seconds: 5
+
+publisher:
+  # Batch size: how many records to forward in a single publish call
+  batch_size: 100

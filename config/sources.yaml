@@ -1,0 +1,67 @@
+# sources.yaml
+# Configuration for each external data source collector.
+# This file controls which sources are active and their operational parameters.
+# Credentials and secrets must come from environment variables, not this file.
+
+sources:
+
+  # ── News ────────────────────────────────────────────────────────────────────
+  - source_id: example_news_rss
+    category: news
+    enabled: false
+    poll_interval_seconds: 600
+    timeout_seconds: 20
+    max_retries: 3
+    # extra keys are passed through to the collector as opaque config
+    extra:
+      feed_url_env: EXAMPLE_NEWS_RSS_URL  # env var holding the actual URL
+
+  # ── Maritime ────────────────────────────────────────────────────────────────
+  - source_id: example_ais_feed
+    category: maritime
+    enabled: false
+    poll_interval_seconds: 120
+    timeout_seconds: 30
+    max_retries: 5
+    extra:
+      api_key_env: MARITIME_API_KEY
+
+  # ── Sanctions ───────────────────────────────────────────────────────────────
+  - source_id: example_sanctions_list
+    category: sanctions
+    enabled: false
+    poll_interval_seconds: 3600   # hourly
+    timeout_seconds: 60
+    max_retries: 3
+    extra:
+      list_url_env: SANCTIONS_LIST_URL
+
+  # ── Commodities ─────────────────────────────────────────────────────────────
+  - source_id: example_crude_price_feed
+    category: commodities
+    enabled: false
+    poll_interval_seconds: 900
+    timeout_seconds: 15
+    max_retries: 3
+    extra:
+      api_key_env: COMMODITY_API_KEY
+
+  # ── Conflict ─────────────────────────────────────────────────────────────────
+  - source_id: example_conflict_events
+    category: conflict
+    enabled: false
+    poll_interval_seconds: 1800
+    timeout_seconds: 30
+    max_retries: 3
+    extra:
+      api_key_env: CONFLICT_API_KEY
+
+  # ── Weather ──────────────────────────────────────────────────────────────────
+  - source_id: example_weather_alerts
+    category: weather
+    enabled: false
+    poll_interval_seconds: 600
+    timeout_seconds: 20
+    max_retries: 3
+    extra:
+      api_key_env: WEATHER_API_KEY
