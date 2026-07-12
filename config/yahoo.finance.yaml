@@ -1,0 +1,54 @@
+# ==========================================================
+# Yahoo Finance Commodity Configuration
+# ==========================================================
+# This file defines which commodity futures should be tracked
+# by the Yahoo Finance collector.
+#
+# Symbols follow Yahoo Finance ticker conventions.
+# ==========================================================
+
+commodities:
+
+  energy:
+    - symbol: "CL=F"
+      name: "WTI Crude Oil"
+
+    - symbol: "BZ=F"
+      name: "Brent Crude Oil"
+
+    - symbol: "NG=F"
+      name: "Natural Gas"
+
+    - symbol: "RB=F"
+      name: "RBOB Gasoline"
+
+    - symbol: "HO=F"
+      name: "Heating Oil"
+
+  metals:
+
+    - symbol: "GC=F"
+      name: "Gold"
+
+    - symbol: "SI=F"
+      name: "Silver"
+
+    - symbol: "HG=F"
+      name: "Copper"
+
+    - symbol: "PL=F"
+      name: "Platinum"
+
+    - symbol: "PA=F"
+      name: "Palladium"
+
+  
+
+settings:
+
+  interval: "1d"
+  period: "5d"
+
+  # Future settings
+  auto_adjust: true
+  prepost: false

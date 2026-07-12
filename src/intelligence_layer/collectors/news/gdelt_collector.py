@@ -52,7 +52,7 @@ class GdeltCollector(BaseCollector):
         self.base_url = self._config.extra.get(
             "base_url", "https://api.gdeltproject.org/api/v2/doc/doc"
         )
-        self.max_records = int(self._config.extra.get("max_records", "250"))
+        self.max_records = int(self._config.extra.get("max_records", "10"))
         self.api_mode = self._config.extra.get("mode", "artlist")
         self.response_format = self._config.extra.get("format", "json")
 
