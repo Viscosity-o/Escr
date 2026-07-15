@@ -1,0 +1,10 @@
+# Runtime dependencies for the global intelligence layer
+requests>=2.32.0
+PyYAML>=6.0.0
+yfinance>=0.2.0
+
+# Development / test dependencies
+pytest>=8.0.0
+pytest-cov>=5.0.0
+ruff>=0.5.0
+mypy>=1.10.0
