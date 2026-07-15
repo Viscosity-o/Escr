@@ -1,0 +1,75 @@
+# newsapi_filters.yaml
+# ====================
+# Configurable filter vocabulary for the NewsAPI News Collector.
+#
+# Each group under 'filter_groups' contains a list of search terms.
+# All groups are combined into a single optimized NewsAPI query at runtime,
+# or queried individually during dry-run testing.
+#
+# To add new terms:       Append to the relevant group.
+# To add a new group:     Add a new key under 'filter_groups' with a list of terms.
+# To disable a group:     Remove it or comment it out.
+#
+# Multi-word terms are automatically wrapped in double quotes by the query builder.
+# No code changes are required to modify these filters.
+
+# ISO 639-1 language code for NewsAPI
+language: en
+
+filter_groups:
+
+  energy_keywords:
+    - "crude oil"
+    - "oil production"
+    - "oil exports"
+    - "oil imports"
+    - LNG
+    - "oil tanker"
+    - refinery
+    - "refinery shutdown"
+    - pipeline
+    - "export terminal"
+    - "strategic petroleum reserve"
+    - "fuel supply disruption"
+
+  geopolitical_keywords:
+    - sanctions
+    - "military conflict"
+    - "naval exercise"
+    - "missile attack"
+    - "drone attack"
+    - piracy
+    - "terror attack"
+    - "political instability"
+    - "export ban"
+    - "maritime incident"
+    - "port closure"
+    - "port congestion"
+    - "trade restriction"
+    - OPEC
+    - "OPEC+"
+
+  shipping_and_logistics:
+    - shipping
+    - "maritime transport"
+    - "shipping disruption"
+    - "government restriction"
+
+  maritime_corridors:
+    - "Strait of Hormuz"
+    - "Red Sea"
+    - "Bab el-Mandeb"
+    - "Suez Canal"
+    - "Strait of Malacca"
+    - "Persian Gulf"
+
+  countries_of_interest:
+    - Iran
+    - Iraq
+    - "Saudi Arabia"
+    - UAE
+    - Qatar
+    - Kuwait
+    - Russia
+    - Israel
+    - Yemen

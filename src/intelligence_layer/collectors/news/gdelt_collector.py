@@ -8,6 +8,7 @@ This collector builds a single optimized query string from the configuration
 groups, establishes a connection using the requests library, and handles
 retries, timeouts, and exception mapping cleanly.
 """
+import random
 import time
 from typing import Any
 
@@ -99,6 +100,9 @@ class GdeltCollector(BaseCollector):
             self.query,
         )
 
+        # Pre-request delay to respect GDELT's rate limit window between runs
+        time.sleep(5)
+
         for attempt in range(max_retries + 1):
             try:
                 response = requests.get(
@@ -125,8 +129,10 @@ class GdeltCollector(BaseCollector):
                         # Extra backoff: wait slightly longer for rate limit recovery
                         sleep_time = self.retry_backoff_seconds * (2**attempt)
                         if is_rate_limited:
-                            # GDELT explicitly asks for at least 5s
-                            sleep_time = max(sleep_time, 5.0)
+                            # GDELT asks for at least 5s; we use a 7s floor for safety
+                            sleep_time = max(sleep_time, 7.0)
+                            # Add positive-only jitter (0–3s) to avoid predictable retry timing
+                            sleep_time += random.uniform(0, 3.0)
                         time.sleep(sleep_time)
                         continue
 

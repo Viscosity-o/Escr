@@ -1,13 +1,16 @@
 import logging
 import traceback
 
+import sys
+import os
+
+# Add the src directory (Escr/src) to sys.path to allow importing intelligence_layer
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
 from intelligence_layer.collectors.commodities.Commodity_collector import CommodityCollector
 from intelligence_layer.models.source_config import SourceConfig
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
-)
+logging.getLogger("intelligence_layer").setLevel(logging.INFO)
 
 def main():
     config = SourceConfig(

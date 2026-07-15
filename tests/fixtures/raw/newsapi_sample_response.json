@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "totalResults": 2,
+  "articles": [
+    {
+      "source": {
+        "id": "reuters",
+        "name": "Reuters"
+      },
+      "author": "Reuters Staff",
+      "title": "Oil prices rise as OPEC+ cuts take effect",
+      "description": "Crude oil prices climbed on Monday as OPEC+ production cuts began to take effect.",
+      "url": "https://www.reuters.com/business/energy/oil-prices-rise-2026-07-15/",
+      "urlToImage": "https://www.reuters.com/images/oil-rig.jpg",
+      "publishedAt": "2026-07-15T10:30:00Z",
+      "content": "Crude oil prices climbed on Monday as OPEC+ production cuts began to take effect, with Brent crude futures rising 1.2% to $78.50 a barrel..."
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Bloomberg.com"
+      },
+      "author": "John Doe",
+      "title": "LNG exports surge amid rising demand in Asia",
+      "description": "Liquefied natural gas exports from the US reached record levels in June.",
+      "url": "https://www.bloomberg.com/news/lng-exports-surge-2026-07-14",
+      "urlToImage": null,
+      "publishedAt": "2026-07-14T14:00:00Z",
+      "content": "Liquefied natural gas exports from the United States reached record levels in June as demand from Asian buyers continued to grow..."
+    }
+  ]
+}

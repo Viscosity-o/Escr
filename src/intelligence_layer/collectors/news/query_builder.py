@@ -138,3 +138,75 @@ def build_query_from_config(config_path: Path) -> str:
 
     terms = extract_all_terms(filter_groups)
     return build_gdelt_query(terms, source_language)
+
+
+def get_filter_group_names(config_path: Path) -> list[str]:
+    """
+    Return the list of filter group names defined in the config file.
+
+    Args:
+        config_path: Path to the GDELT filters YAML file.
+
+    Returns:
+        List of group name strings (e.g. ['energy_keywords', 'geopolitical_keywords', ...]).
+    """
+    config = load_filter_config(config_path)
+    filter_groups: dict[str, list[str]] = config.get("filter_groups", {})
+    return list(filter_groups.keys())
+
+
+def build_query_for_group(
+    config_path: Path,
+    group_name: str,
+    max_terms: int = 6,
+) -> str:
+    """
+    Build a GDELT query using only the first ``max_terms`` terms from a single
+    filter group.
+
+    This is useful for dry-run / testing scenarios where sending one smaller
+    query per group avoids triggering GDELT's rate limits.
+
+    Args:
+        config_path: Path to the GDELT filters YAML file.
+        group_name: Key of the filter group to use (must exist in the config).
+        max_terms: Maximum number of terms to include from the group.
+
+    Returns:
+        A ready-to-use GDELT query string.
+
+    Raises:
+        KeyError: If ``group_name`` is not found in the config's filter_groups.
+        ValueError: If the group exists but has no terms.
+    """
+    config = load_filter_config(config_path)
+    filter_groups: dict[str, list[str]] = config.get("filter_groups", {})
+    source_language: str = config.get("source_language", "English")
+
+    if group_name not in filter_groups:
+        available = ", ".join(filter_groups.keys())
+        raise KeyError(
+            f"Filter group '{group_name}' not found. Available groups: {available}"
+        )
+
+    raw_terms = filter_groups[group_name]
+    # Deduplicate and strip, then cap at max_terms
+    seen: set[str] = set()
+    terms: list[str] = []
+    for term in raw_terms:
+        normalized = term.strip()
+        if normalized and normalized not in seen:
+            seen.add(normalized)
+            terms.append(normalized)
+        if len(terms) >= max_terms:
+            break
+
+    logger.debug(
+        "Building query for group '%s': using %d/%d terms (max_terms=%d)",
+        group_name,
+        len(terms),
+        len(raw_terms),
+        max_terms,
+    )
+    return build_gdelt_query(terms, source_language)
+
